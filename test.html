@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Tile Test</title>
+       <script src="libs/phaser.js" type="text/javascript"></script>
+	   <link rel="stylesheet" href="tile_style.css" type="text/css">
+    </head>
+    <body>
+	<h1>Listen and match!</h1>
+	<div class="links">
+		<a href="index.html">Learn the words</a>
+	</div>
+	<div id="game"></div>
+	
+    <script type="text/javascript">
+
+    window.onload = function() {
+
+        var game = new Phaser.Game(550, 400, Phaser.AUTO, 'game', { preload: preload, create: create, update:update });
+		function Tile(name,sound){
+			this.name=name;			//name is used for files, ex: tile1 is name, file would be tile1.jpg
+			this.sound=sound;
+		}
+		Tile.prototype={
+			setMatch: function(match){
+				this.match=match;	//name of matching object
+			},
+			setLocation: function(loc){
+				this.loc=loc;
+			}	
+		};
+		var tileButtons=[];
+		var tiles=[];			//array of tile objects
+		var totalTiles=6;
+		var totalMatches=totalTiles;
+		var score=0;
+		var scoreText;
+		var start=false;
+		var match_made=false;	//reports whether those two tiles match
+		var playOrder=[];
+		var currPlay=0;
+        function preload () {
+
+			game.load.image('bg','assets/bg.png');
+			
+			for(var i=1; i<=totalTiles; i++){
+				game.load.spritesheet('tile'+i,'assets/tile'+i+'.png',100,100);
+				game.load.audio('tile'+i+'_ch','assets/tile'+i+'_ch.mp3');
+				game.load.audio('tile'+i+'_ch_2','assets/tile'+i+'_ch_2.mp3');
+			}
+        }
+
+        function create () {
+			//  A simple background for our game
+			game.add.sprite(0, 0, 'bg');
+			//generates tile objects
+			var loc=[];
+			for(var i=0;i<totalTiles;i++){
+				loc[i]=i;
+				tiles[i] = new Tile('tile'+(i+1),game.add.audio('tile'+(i+1)+'_ch'));				//create matching tiles
+				tiles[i].setLocation(i);
+			}
+			
+			for(var i=0; i<totalTiles;i++){
+				var done=false;
+				var rand = Math.floor(Math.random() * (loc.length-1));
+				playOrder[i]=loc[rand];
+				loc.splice(rand,1);
+			}
+		
+			var tileSize=100;
+			var space=25;
+			var left=150;
+			var top=150;
+			var tilesPerRow=3;
+			var numRows=2;
+			for(var k=0;k<numRows;k++){
+				for(var i=0;i<tilesPerRow;i++){
+					tileButtons[i+tilesPerRow*k]  = game.add.button(i*(tileSize+space)+left, top+k*(tileSize+space), tiles[i+tilesPerRow*k].name,action,tiles[i+tilesPerRow*k],1,1,1,1);
+					tileButtons[i+tilesPerRow*k].anchor.setTo(0.5, 0.5);
+				}
+			}
+			scoreText=game.add.text(16,16,'score:0',{fontSize: '32px', fill: '#000'});
+			
+        }
+		function update(){
+			if(!start){
+				start=true;
+				tiles[playOrder[currPlay]].sound.play();
+			}
+			if(match_made==true){
+				score+=10;
+				scoreText.text='Score: '+score;
+				match_made=false;
+			}
+			if(score>=10*totalTiles){
+				scoreText.text='You\'re a winner!';
+			}
+		}
+		function action(){
+			this.sound.play();
+			if(this==tiles[playOrder[currPlay]]){
+				var tile1=tileButtons[this.loc];
+				match_made=true;
+				currPlay++;
+				var nextSound;
+				if(currPlay<tiles.length){
+					nextSound= tiles[playOrder[currPlay]].sound;
+					window.setTimeout(function(){
+						tile1.destroy()
+						nextSound.play();
+					}, 1000);
+					}
+				else{
+					window.setTimeout(function(){
+						tile1.destroy()
+					}, 1000);
+				}
+			}
+			else{
+				var tile1=tileButtons[this.loc];
+				var nextSound = tiles[playOrder[currPlay]].sound;
+				window.setTimeout(function(){	
+						tile1=null;
+						nextSound.play();
+					}, 1000);
+			}
+			
+		
+		}
+    };
+
+    </script>
+
+    </body>
+</html>

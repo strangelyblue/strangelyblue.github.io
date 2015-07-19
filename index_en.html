@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <title>Tile Match</title>
        <script src="libs/phaser.js" type="text/javascript"></script>
+	   <link rel="stylesheet" href="tile_style.css" type="text/css">
     </head>
     <body>
 	<h1>Chinese matching with English</h1>
@@ -19,7 +20,7 @@
 
     window.onload = function() {
 
-        var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
+        var game = new Phaser.Game(600, 500, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
 		function Tile(name,sound){
 			this.name=name;			//name is used for files, ex: tile1 is name, file would be tile1.jpg
 			this.sound=sound;
@@ -80,15 +81,19 @@
 				tiles[tile2].setMatch(tiles[tile1]);
 			}
 		
+			var tileSize=100;
+			var space=25;
+			var left=100;
+			var top=150;
 			//row 1
 			for(var i=0; i<totalTiles;i++){
-				tileButtons[i]  = game.add.button(i*200+100, 200, tiles[i].name,action,tiles[i]);
+				tileButtons[i]  = game.add.button(i*(tileSize+space)+left, top, tiles[i].name,action,tiles[i]);
 				tileButtons[i].anchor.setTo(0.5, 0.5);
 			}
 			
 			//row 2
 			for(var i=totalTiles; i<totalMatches; i++){
-				tileButtons[i] = game.add.button((i-totalTiles)*200+100, 400, tiles[i].name,action,tiles[i]);
+				tileButtons[i] = game.add.button((i-totalTiles)*(tileSize+space)+left, top+tileSize+space, tiles[i].name,action,tiles[i]);
 				tileButtons[i].anchor.setTo(0.5, 0.5);
 			}
 			/*

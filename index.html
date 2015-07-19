@@ -4,22 +4,20 @@
         <meta charset="UTF-8" />
         <title>Tile Match</title>
        <script src="libs/phaser.js" type="text/javascript"></script>
+	   <link rel="stylesheet" href="tile_style.css" type="text/css">
     </head>
     <body>
-	<h1>Chinese matching with Chinese</h1>
-	<div id="game"></div>
+	<h1>Play tile match!</h1>
 	<div class="links">
-		<ul style="list-style-type:none">
-		<li><a href="index.html">Try chinese matching with same audio</a>
-		<li><a href="index_en.html">Try chinese matching with english</a>
-		<li><a href="index_ch2.html">Try chinese matching with different audio</a>
-		</ul>
+		<a href="test.html">Test yourself!</a>
 	</div>
+	<div id="game"></div>
+	
     <script type="text/javascript">
 
     window.onload = function() {
 
-        var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
+        var game = new Phaser.Game(600, 500, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
 		function Tile(name,sound){
 			this.name=name;			//name is used for files, ex: tile1 is name, file would be tile1.jpg
 			this.sound=sound;
@@ -34,7 +32,7 @@
 		};
 		var tileButtons=[];
 		var tiles=[];			//array of tile objects
-		var totalTiles=3;
+		var totalTiles=6;
 		var totalMatches=totalTiles*2;
 		var score=0;
 		var scoreText;
@@ -48,7 +46,7 @@
 			for(var i=1; i<=totalTiles; i++){
 				game.load.spritesheet('tile'+i,'assets/tile'+i+'.png',100,100);
 				game.load.audio('tile'+i+'_ch','assets/tile'+i+'_ch.mp3');
-				game.load.audio('tile'+i+'_en','assets/tile'+i+'_en.mp3');
+				game.load.audio('tile'+i+'_ch_2','assets/tile'+i+'_ch_2.mp3');
 			}
         }
 
@@ -73,24 +71,38 @@
 				loc.splice(rand,1);
 					
 				tiles[tile1] = new Tile('tile'+(i+1),game.add.audio('tile'+(i+1)+'_ch'));				//create matching tiles
-				tiles[tile2] =  new Tile('tile'+(i+1),game.add.audio('tile'+(i+1)+'_ch'));
+				tiles[tile2] =  new Tile('tile'+(i+1),game.add.audio('tile'+(i+1)+'_ch_2'));
 				tiles[tile1].setLocation(tile1);
 				tiles[tile2].setLocation(tile2);
 				tiles[tile1].setMatch(tiles[tile2]);			//set their 'match' value to each other
 				tiles[tile2].setMatch(tiles[tile1]);
 			}
 		
+			var tileSize=100;
+			var space=25;
+			var left=100;
+			var top=150;
+			var tilesPerRow=4;
+			var numRows=3;
+			for(var k=0;k<numRows;k++){
+				for(var i=0;i<tilesPerRow;i++){
+					tileButtons[i+tilesPerRow*k]  = game.add.button(i*(tileSize+space)+left, top+k*(tileSize+space), tiles[i+tilesPerRow*k].name,action,tiles[i+tilesPerRow*k]);
+					tileButtons[i+tilesPerRow*k].anchor.setTo(0.5, 0.5);
+				}
+			}
+			/*
+			
 			//row 1
-			for(var i=0; i<totalTiles;i++){
-				tileButtons[i]  = game.add.button(i*200+100, 200, tiles[i].name,action,tiles[i]);
+			for(var i=0; i<tilesPerRow;i++){
+				tileButtons[i]  = game.add.button(i*(tileSize+space)+left, top, tiles[i].name,action,tiles[i]);
 				tileButtons[i].anchor.setTo(0.5, 0.5);
 			}
 			
 			//row 2
 			for(var i=totalTiles; i<totalMatches; i++){
-				tileButtons[i] = game.add.button((i-totalTiles)*200+100, 400, tiles[i].name,action,tiles[i]);
+				tileButtons[i] = game.add.button((i-totalTiles)*(tileSize+space)+left, top+tileSize+space, tiles[i].name,action,tiles[i]);
 				tileButtons[i].anchor.setTo(0.5, 0.5);
-			}
+			}*/
 			/*
 			for(var i=1;i<=totalTiles*2;i++){
 				var onClick = action(tileButtons[i],tiles[i]);
