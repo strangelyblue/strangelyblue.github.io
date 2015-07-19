@@ -99,7 +99,10 @@
 			}
 		}
 		function action(){
-			this.sound.play();
+			var playSound= this.sound;
+			window.setTimeout(function(){
+				playSound.play();
+				}, 500);
 			if(this==tiles[playOrder[currPlay]]){
 				var tile1=tileButtons[this.loc];
 				match_made=true;
@@ -110,7 +113,7 @@
 					window.setTimeout(function(){
 						tile1.destroy()
 						nextSound.play();
-					}, 1000);
+					}, 1500);
 					}
 				else{
 					window.setTimeout(function(){
