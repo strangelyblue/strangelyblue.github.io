@@ -6,7 +6,7 @@
        <script src="libs/phaser.js" type="text/javascript"></script>
     </head>
     <body>
-	<h1>Chinese matching with Chinese</h1>
+	<h1>Chinese matching with different audio Chinese</h1>
 	<div id="game"></div>
 	<div class="links">
 		<ul style="list-style-type:none">
@@ -48,7 +48,7 @@
 			for(var i=1; i<=totalTiles; i++){
 				game.load.spritesheet('tile'+i,'assets/tile'+i+'.png',100,100);
 				game.load.audio('tile'+i+'_ch','assets/tile'+i+'_ch.mp3');
-				game.load.audio('tile'+i+'_en','assets/tile'+i+'_en.mp3');
+				game.load.audio('tile'+i+'_ch_2','assets/tile'+i+'_ch_2.mp3');
 			}
         }
 
@@ -73,7 +73,7 @@
 				loc.splice(rand,1);
 					
 				tiles[tile1] = new Tile('tile'+(i+1),game.add.audio('tile'+(i+1)+'_ch'));				//create matching tiles
-				tiles[tile2] =  new Tile('tile'+(i+1),game.add.audio('tile'+(i+1)+'_ch'));
+				tiles[tile2] =  new Tile('tile'+(i+1),game.add.audio('tile'+(i+1)+'_ch_2'));
 				tiles[tile1].setLocation(tile1);
 				tiles[tile2].setLocation(tile2);
 				tiles[tile1].setMatch(tiles[tile2]);			//set their 'match' value to each other
