@@ -119,8 +119,14 @@
 			}
 			else{
 				if(matchTile.name==this.name){
+					var tile1=tileButtons[this.loc];
+					var tile2=tileButtons[matchTile.loc];
 					match_made=true;
 					matchTile=null;
+					window.setTimeout(function(){
+						tile1.destroy()
+						tile2.destroy();
+					}, 1000);
 				}
 				else{
 					var tile1=tileButtons[this.loc];
