@@ -62,7 +62,7 @@ var Game={
 			
 			for(var i=0; i<totalTiles;i++){
 				var done=false;
-				var rand = Math.floor(Math.random() * (loc.length-1));
+				var rand = Math.floor(Math.random() * loc.length);
 				playOrder[i]=loc[rand];
 				loc.splice(rand,1);
 			}
