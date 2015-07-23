@@ -87,26 +87,26 @@ var Game = {
 			scoreText=game.add.text(16,16,'score:0',{fontSize: '32px', fill: '#fff'});
         },
 		update:function(){
-			updateDelay++;
-			if (updateDelay % 60== 0){
+			//updateDelay++;
+			//if (updateDelay % 100== 0){
 				if(match_made==true){
-					tile1.destroy()
-					tile2.destroy();
+					/*tile1.destroy()
+					tile2.destroy();*/
 					score+=10;
 					scoreText.text='Score: '+score;
 					match_made=false;
 				}
-				else if(tile1&&tile2){
+				/*else if(tile1&&tile2){
 					tile1.setFrames(0,0,0);
 					tile2.setFrames(0,0,0);
 					tile1=null;
 					tile2=null;
-				}
+				}*/
 				if(score>=10*totalTiles){
 					//scoreText.text='You\'re a winner!';
 					this.state.start('Win');
 				}
-			}
+			//}
 		},
 		action: function(){
 			tileButtons[this.loc].setFrames(1,1,1);
@@ -120,22 +120,22 @@ var Game = {
 					tile2=tileButtons[matchTile.loc];
 					match_made=true;
 					matchTile=null;
-					/*window.setTimeout(function(){
+					window.setTimeout(function(){
 						tile1.destroy()
 						tile2.destroy();
-					}, 1000);*/
+					}, 1000);
 				}
 				else{
 					tile1=tileButtons[this.loc];
 					tile2=tileButtons[matchTile.loc];
 					matchTile=null;
-					/*window.setTimeout(function(){	
+					window.setTimeout(function(){	
 							tile1.setFrames(0,0,0);
 							tile2.setFrames(0,0,0);
 							matchTile=null;
 							tile1=null;
 							tile2=null;
-						}, 1000);*/
+						}, 1000);
 				}
 			}
 		
