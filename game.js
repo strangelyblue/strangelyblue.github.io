@@ -88,7 +88,7 @@ var Game = {
         },
 		update:function(){
 			updateDelay++;
-			if (updateDelay % 200== 0){
+			if (updateDelay % 60== 0){
 				if(match_made==true){
 					tile1.destroy()
 					tile2.destroy();
