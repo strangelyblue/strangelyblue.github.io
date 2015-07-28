@@ -24,12 +24,12 @@ var updateDelay;
 var Game = {
         preload: function() {
 
-			game.load.image('bg','assets/bg.png');
-			
+			//game.load.image('bg','assets/bg.png');
+			game.load.atlas('game_tiles','assets/'+gameType+'/spritesheet.png','assets/'+gameType+'/sprites.json');
 			for(var i=1; i<=totalTiles; i++){
-				game.load.spritesheet('tile'+i,'assets/tile'+i+'.png',100,100);
-				game.load.audio('tile'+i+'_ch','assets/tile'+i+'_ch.mp3');
-				game.load.audio('tile'+i+'_ch_2','assets/tile'+i+'_ch_2.mp3');
+				//game.load.spritesheet('tile'+i,'assets/tile'+i+'.png',100,100);
+				game.load.audio('tile'+i+'_ch','assets/'+gameType+'/tile'+i+'_ch.mp3');
+				game.load.audio('tile'+i+'_ch_2','assets/'+gameType+'/tile'+i+'_ch_2.mp3');
 			}
         },
         create: function() {
@@ -45,6 +45,7 @@ var Game = {
 		
 			//  A simple background for our game
 			//game.add.sprite(0, 0, 'bg');
+			
 			game.stage.backgroundColor = '#0F4F63';
 			//generates tile objects
 			var loc=[];
@@ -74,17 +75,17 @@ var Game = {
 			var tileSize=100;
 			var space=25;
 			var left=100;
-			var top=150;
+			var top=100;
 			var tilesPerRow=4;
 			var numRows=3;
 			for(var k=0;k<numRows;k++){
 				for(var i=0;i<tilesPerRow;i++){
-					tileButtons[i+tilesPerRow*k]  = game.add.button(i*(tileSize+space)+left, top+k*(tileSize+space), tiles[i+tilesPerRow*k].name,this.action,tiles[i+tilesPerRow*k]);
+					tileButtons[i+tilesPerRow*k]  = game.add.button(i*(tileSize+space)+left, top+k*(tileSize+space), /*tiles[i+tilesPerRow*k].name*/'game_tiles',this.action,tiles[i+tilesPerRow*k],'a','a','a',tiles[i+tilesPerRow*k].name);
 					tileButtons[i+tilesPerRow*k].anchor.setTo(0.5, 0.5);
 				}
 			}
 			
-			scoreText=game.add.text(16,16,'score:0',{fontSize: '32px', fill: '#fff'});
+			//scoreText=game.add.text(16,16,'score:0',{fontSize: '32px', fill: '#fff'});
         },
 		update:function(){
 			//updateDelay++;
@@ -93,7 +94,7 @@ var Game = {
 					/*tile1.destroy()
 					tile2.destroy();*/
 					score+=10;
-					scoreText.text='Score: '+score;
+					//scoreText.text='Score: '+score;
 					match_made=false;
 				}
 				/*else if(tile1&&tile2){
@@ -109,7 +110,8 @@ var Game = {
 			//}
 		},
 		action: function(){
-			tileButtons[this.loc].setFrames(1,1,1);
+			var tileName=tiles[this.loc].name;
+			tileButtons[this.loc].setFrames(tileName,tileName,tileName);
 			this.sound.play();
 			if(!matchTile){
 				matchTile=this;
@@ -121,8 +123,10 @@ var Game = {
 					match_made=true;
 					matchTile=null;
 					window.setTimeout(function(){
-						tile1.destroy()
-						tile2.destroy();
+						/*tile1.destroy()
+						tile2.destroy();*/
+						tile1.setFrames('b','b','b');
+						tile2.setFrames('b','b','b');
 					}, 1000);
 				}
 				else{
@@ -130,8 +134,8 @@ var Game = {
 					tile2=tileButtons[matchTile.loc];
 					matchTile=null;
 					window.setTimeout(function(){	
-							tile1.setFrames(0,0,0);
-							tile2.setFrames(0,0,0);
+							tile1.setFrames('a','a','a');
+							tile2.setFrames('a','a','a');
 							matchTile=null;
 							tile1=null;
 							tile2=null;
