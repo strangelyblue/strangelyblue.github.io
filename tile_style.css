@@ -1,5 +1,6 @@
 body{
 	background:white;
+	font-family: Courier New;
 }
 h1{
 	text-align:center;
@@ -9,7 +10,6 @@ div{
 	margin-right:25%;
 }
 a{
-	text-decoration:none;
 	color:red;
 }
 a:hover{
@@ -17,4 +17,8 @@ a:hover{
 }
 ul{
 	list-style:none;
+	position:relative;
+}
+li{
+	width:500px;
 }

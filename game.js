@@ -26,6 +26,7 @@ var Game = {
 
 			//game.load.image('bg','assets/bg.png');
 			game.load.atlas('game_tiles','assets/'+gameType+'/spritesheet.png','assets/'+gameType+'/sprites.json');
+			game.load.image('shadow', 'assets/shadow_tile.png');
 			for(var i=1; i<=totalTiles; i++){
 				//game.load.spritesheet('tile'+i,'assets/tile'+i+'.png',100,100);
 				game.load.audio('tile'+i+'_ch','assets/'+gameType+'/tile'+i+'_ch.mp3');
@@ -45,8 +46,7 @@ var Game = {
 		
 			//  A simple background for our game
 			//game.add.sprite(0, 0, 'bg');
-			
-			game.stage.backgroundColor = '#0F4F63';
+			game.stage.backgroundColor = '#C0ED50';
 			//generates tile objects
 			var loc=[];
 			for(var i=0;i<totalMatches;i++){
@@ -74,14 +74,15 @@ var Game = {
 		
 			var tileSize=100;
 			var space=25;
-			var left=100;
-			var top=100;
+			var left=50;
+			var top=50;
 			var tilesPerRow=4;
 			var numRows=3;
 			for(var k=0;k<numRows;k++){
 				for(var i=0;i<tilesPerRow;i++){
+					game.add.sprite(i*(tileSize+space)+left+3, top+k*(tileSize+space)+2, 'shadow');
 					tileButtons[i+tilesPerRow*k]  = game.add.button(i*(tileSize+space)+left, top+k*(tileSize+space), /*tiles[i+tilesPerRow*k].name*/'game_tiles',this.action,tiles[i+tilesPerRow*k],'a','a','a',tiles[i+tilesPerRow*k].name);
-					tileButtons[i+tilesPerRow*k].anchor.setTo(0.5, 0.5);
+					//tileButtons[i+tilesPerRow*k].anchor.setTo(0.5, 0.5);
 				}
 			}
 			
