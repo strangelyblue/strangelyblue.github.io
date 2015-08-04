@@ -13,8 +13,8 @@ Tile.prototype={
 };
 var tileButtons;
 var tiles;			//array of tile objects
-var totalTiles=6;
-var totalMatches=totalTiles;
+var maxTiles=12;
+var totalTiles;
 var score;
 var scoreText;
 var matchTile;			//holds the tile to check against when testing 2nd tile
@@ -29,6 +29,12 @@ var tries;
 var Game={
         preload: function() {
 			//game.load.image('bg','assets/bg.png');
+			if(vocabNum<maxTiles){
+				totalTiles=vocabNum;
+			}
+			else{
+				totalTiles=maxTiles;
+			}
 			game.load.atlas('game_tiles','assets/'+gameType+'/spritesheet.png','assets/'+gameType+'/sprites.json');
 			game.load.image('shadow', 'assets/shadow_tile.png');
 			for(var i=1; i<=totalTiles; i++){
@@ -68,22 +74,34 @@ var Game={
 				playOrder[i]=loc[rand];
 				loc.splice(rand,1);
 			}
-		
+			//575,450
+			
 			var tileSize=100;
 			var space=25;
-			var left=100;
-			var top=100;
-			var tilesPerRow=3;
-			var numRows=2;
+			var left;
+			var top;
+			var tilesPerRow;
+			var numRows;
+			if(totalTiles<9){	//3x3
+				tilesPerRow=3;
+			}
+			else{
+				tilesPerRow=4; //4x3
+			}
+			left=(575-((tileSize+space)*tilesPerRow)+space)/2;
+			numRows=Math.ceil(totalTiles/tilesPerRow);			//6 tiles-> 2 rows, 9 tiles->3 rows;
+			top=(450-((tileSize+space)*numRows)+space)/2;
 			
 			for(var k=0;k<numRows;k++){
 				for(var i=0;i<tilesPerRow;i++){
-					game.add.sprite(i*(tileSize+space)+left+3, top+k*(tileSize+space)+2, 'shadow');
-					tileButtons[i+tilesPerRow*k]  = game.add.button(i*(tileSize+space)+left, top+k*(tileSize+space), /*tiles[i+tilesPerRow*k].name*/'game_tiles',this.action,tiles[i+tilesPerRow*k],tiles[i+tilesPerRow*k].name,tiles[i+tilesPerRow*k].name,tiles[i+tilesPerRow*k].name,tiles[i+tilesPerRow*k].name);
-					//tileButtons[i+tilesPerRow*k].anchor.setTo(0.5, 0.5);
+					if(tiles[i+tilesPerRow*k]){
+						game.add.sprite(i*(tileSize+space)+left+3, top+k*(tileSize+space)+2, 'shadow');
+						tileButtons[i+tilesPerRow*k]  = game.add.button(i*(tileSize+space)+left, top+k*(tileSize+space), /*tiles[i+tilesPerRow*k].name*/'game_tiles',this.action,tiles[i+tilesPerRow*k],tiles[i+tilesPerRow*k].name,tiles[i+tilesPerRow*k].name,tiles[i+tilesPerRow*k].name,tiles[i+tilesPerRow*k].name);
+						//tileButtons[i+tilesPerRow*k].anchor.setTo(0.5, 0.5);
+					}
 				}
 			}
-			//scoreText=game.add.text(16,16,'score:0',{fontSize: '32px', fill: '#fff'});
+			game.add.text(50,16,'Listen to the word, click on the matching picture!',{font: '16px Courier New', fill: '#000'});
 			
         },
 		update:function(){

@@ -27,7 +27,7 @@ var Game = {
 			//game.load.image('bg','assets/bg.png');
 			game.load.atlas('game_tiles','assets/'+gameType+'/spritesheet.png','assets/'+gameType+'/sprites.json');
 			game.load.image('shadow', 'assets/shadow_tile.png');
-			for(var i=1; i<=totalTiles; i++){
+			for(var i=1; i<=vocabNum; i++){//for(var i=1; i<=totalTiles; i++){
 				//game.load.spritesheet('tile'+i,'assets/tile'+i+'.png',100,100);
 				game.load.audio('tile'+i+'_ch','assets/'+gameType+'/tile'+i+'_ch.mp3');
 				game.load.audio('tile'+i+'_ch_2','assets/'+gameType+'/tile'+i+'_ch_2.mp3');
@@ -49,23 +49,30 @@ var Game = {
 			game.stage.backgroundColor = '#C0ED50';
 			//generates tile objects
 			var loc=[];
+			var tileNum=[];
 			for(var i=0;i<totalMatches;i++){
 				loc[i]=i;
 			}
-			
+			for(var i=0;i<vocabNum;i++){
+				tileNum[i]=i+1;
+			}
 			for(var i=0; i<totalTiles;i++){
 				var done=false;
 				var tile1;
 				var tile2;
+				var tileIndex;
 				var rand = Math.floor(Math.random() * (loc.length-1));
 				tile1=loc[rand];
 				loc.splice(rand,1);
 				rand = Math.floor(Math.random() * (loc.length-1));
 				tile2=loc[rand];
 				loc.splice(rand,1);
-					
-				tiles[tile1] = new Tile('tile'+(i+1),game.add.audio('tile'+(i+1)+'_ch'));				//create matching tiles
-				tiles[tile2] =  new Tile('tile'+(i+1),game.add.audio('tile'+(i+1)+'_ch_2'));
+				rand = Math.floor(Math.random() * (tileNum.length-1));
+				tileIndex=tileNum[rand];
+				tileNum.splice(rand,1);
+				
+				tiles[tile1] = new Tile('tile'+(tileIndex),game.add.audio('tile'+(tileIndex)+'_ch'));				//create matching tiles
+				tiles[tile2] =  new Tile('tile'+(tileIndex),game.add.audio('tile'+(tileIndex)+'_ch_2'));
 				tiles[tile1].setLocation(tile1);
 				tiles[tile2].setLocation(tile2);
 				tiles[tile1].setMatch(tiles[tile2]);			//set their 'match' value to each other
@@ -86,7 +93,7 @@ var Game = {
 				}
 			}
 			
-			//scoreText=game.add.text(16,16,'score:0',{fontSize: '32px', fill: '#fff'});
+			game.add.text(50,16,'Click on two tiles and try to find a match!',{font: '16px Courier New', fill: '#000'});
         },
 		update:function(){
 			//updateDelay++;

@@ -1,4 +1,5 @@
 var gameType;
+var vocabNum;
 var Menu={
 	preload: function(){
 		//game.load.image('menu','assets/menu.png');
@@ -20,14 +21,17 @@ var Menu={
 	},
 	startColors: function(){
 		gameType='colors';
+		vocabNum=6;
 		this.state.start('Game');
 	},
 	startNumbers: function(){
 		gameType='numbers';
+		vocabNum=6;
 		this.state.start('Game');
 	},
 	startAnimals: function(){
 		gameType='animals';
+		vocabNum=10;
 		this.state.start('Game');
 	}
 };
