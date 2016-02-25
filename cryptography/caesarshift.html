@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>
+Caesar Shift Generator
+</title>
+<link rel="stylesheet" type="text/css" href="caesarstyle.css"></link>
+</head>
+<body>
+<div class="outer">
+	<div class="inner">
+		<h1>Caesar Shift Generator</h1>
+		<p>A 'space' is considered to be a letter after Z.  Punctuation is ignored.</p>
+		<textarea rows="4" cols="50" id="originText">Text to be shifted.</textarea>
+	</div>
+	<div class="inner">
+		<input type="text" id="shiftNum1"># Shift</input>
+		<button onclick="caesarShift()">Shift!</button>
+	</div>
+</div>
+<div id="output" class="output">Shifted Text Here</div>
+<div class="outer">
+	<div class="inner">
+		<h1>Caesar Shift Breaker</h1>
+		<p>A 'space' is considered to be a letter after Z.  Punctuation is ignored.</p>
+		<textarea rows="4" cols="50" id="shiftedText">Text to be de-shifted.</textarea>
+	</div>
+	<div class="inner">
+		<input type="text" id="shiftNum2"># Shift</input>
+		<button onclick="breakShift()">Shift!</button>
+	</div>
+</div>
+<div id="output" class="output">De-Shifted Text Here</div>
+<script src='caesarshift_js.js'></script>
+</body>
+</html>
