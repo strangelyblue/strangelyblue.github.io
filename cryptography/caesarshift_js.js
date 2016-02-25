@@ -23,7 +23,7 @@ function caesarShift(){
 		}
 	}
 	result=result.concat("'");
-	document.getElementById("output").innerHTML=result;
+	document.getElementById("output1").innerHTML=result;
 }
 function breakShift(){
 	var origin=document.getElementById("shiftedText").value;
