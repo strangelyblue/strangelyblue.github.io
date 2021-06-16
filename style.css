@@ -4,32 +4,52 @@
 https://codepen.io/leenalavanya/pen/mPWdPZ
 */
 body{
-    background:#f0ebd8;
+    background:#224F6D;
     margin:0;
     text-align: center;
 }
-
-.titleImg{
-    width:75%;
-    margin-left:5px;
-    margin-right:5px;
-}
-
-h1{
+h1 {
     font-family: 'Bilbo', cursive;
+    text-shadow: 2px 2px 4px #000000;
+}
+h2 {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-shadow: 2px 2px 4px #0A171F;
 }
 
 a{
     font-family: 'Roboto', sans-serif;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: #710C27;
+}
+a:hover{
+    background-color: #710C27;
 }
 p{
     font-family: 'Roboto', sans-serif;
+    color: white;
+}
+ul{
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    list-style-type: none;
+}
+li{
+    padding:10px;
 }
 
+
+
+
+/*
 ul {
     list-style-type: none;
     padding: 16px;
-    background-color: #224F6D;
+    margin: 0;
   }
   
   li {
@@ -40,9 +60,52 @@ ul {
     color: white;
     text-align: center;
     padding: 16px;
+    margin: 0;
     text-decoration: none;
   }
   
   li a:hover {
-    background-color: #111111;
+    background-color: #710C27;
+  }*/
+.titleImg{
+    width:75%;
+    margin-left:5px;
+    margin-right:5px;
+}
+
+.left{
+    float: left;
+    width: 60%;
+    margin:0;
+    padding:0;
+}
+.right {
+    float: left;
+    width: 40%;
+}
+
+.right img{
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: auto;
+    width: 70%;
+    height: auto;
+    box-shadow: 0 5px 10px #25040D;
+}
+.left div{
+    margin-left:5%;
+}
+.left h1{
+    background-color: #710C27;
+    color: white;
+    margin:0;
+    box-shadow: 0 5px 10px #25040D;
+}
+
+  .header {
+    /*background-color: #224F6D;*/
+    background: rgb(34,79,109);
+    background: linear-gradient(0deg, rgba(34,79,109,1) 35%, rgba(8,40,61,1) 100%);
+    color: white;
   }
