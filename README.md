@@ -1,2 +1,0 @@
-# RPGMaker
-RPGMaker Projects
