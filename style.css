@@ -6,23 +6,27 @@ https://codepen.io/leenalavanya/pen/mPWdPZ
 */
 body{
     background:#224F6D;
+    color: white;
     margin:0;
     text-align: center;
+    font-family: 'Josefin Slab', sans-serif;
 }
 h1 {
     font-family: 'Amatic SC', cursive;
     padding:10px;
+    font-size: xx-large;
 }
+
 h2 {
     font-family: 'Josefin Slab', sans-serif;
     color: white;
     font-weight: 700;
+    font-size: x-large;
 }
 
 a{
     font-family: 'Josefin Slab', sans-serif;
     color: white;
-    text-align: center;
     text-decoration: none;
     text-decoration: underline;
     text-decoration-color: #710C27;
@@ -31,73 +35,49 @@ a:hover{
     background-color: #710C27;
 }
 p{
-    font-family: 'Josefin Slab', sans-serif;
-    color: white;
+    font-size: larger;
 }
 ul{
-    font-family: 'Josefin Slab', sans-serif;
-    color: white;
     list-style-type: none;
+    font-size: larger;
+    clear: left;
+    padding: 0;
 }
 li{
-    padding:10px;
+    padding-bottom:10px;
 }
 
-
-
-
-/*
-ul {
-    list-style-type: none;
-    padding: 16px;
-    margin: 0;
-  }
-  
-  li {
-    display:inline;
-  }
-  
-  li a {
-    color: white;
-    text-align: center;
-    padding: 16px;
-    margin: 0;
-    text-decoration: none;
-  }
-  
-  li a:hover {
-    background-color: #710C27;
-  }*/
 .titleImg{
     width:75%;
     margin-left:5px;
     margin-right:5px;
 }
 
-.left{
+.infodiv{
     float: left;
-    width: 60%;
-    margin:0;
+    width: 40%;
+    margin: auto;
     padding:0;
 }
 
-.right {
+.imgdiv {
     float: left;
-    width: 40%;
+    width: 50%;
+    margin: auto;
+    padding:0;
 }
 
-.right img{
+.imgdiv img{
     max-width: 100%;
     max-height: 100%;
     display: block;
-    margin: auto;
     width: 70%;
     height: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
-.left div{
-    margin-left:5%;
-}
-.left h1{
+
+.infodiv h1{
     background-color: #710C27;
     color: white;
     margin:0;
